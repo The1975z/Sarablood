@@ -3,7 +3,7 @@ body {
   }
   
   .bg-hospital {
-    background-image: url('hospital-hall.jpg');
+    background-image: url('images/hospital-hall.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -16,17 +16,14 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
-  /* เพิ่มเอฟเฟกต์เรืองแสงสำหรับตัวอักษร */
   .text-glow {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   }
   
-  /* เอฟเฟกต์สำหรับปุ่ม */
   button:active:not(:disabled) {
     transform: scale(0.95);
   }
   
-  /* Animation สำหรับการเปลี่ยนคำถาม */
   .fade-in {
     animation: fadeIn 0.5s ease-in;
   }
@@ -36,7 +33,6 @@ body {
     to { opacity: 1; }
   }
   
-  /* เอฟเฟกต์สำหรับผลลัพธ์ */
   #blood-type-result {
     text-shadow: 0 0 15px rgba(220, 38, 38, 0.7);
     animation: pulse 2s infinite;
@@ -48,7 +44,57 @@ body {
     100% { transform: scale(1); }
   }
   
-  /* ปรับแต่งสำหรับหน้าจอมือถือ */
+  @keyframes glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.5); }
+    50% { text-shadow: 0 0 15px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.7); }
+  }
+  
+  .glow-text {
+    animation: glow 2s infinite;
+  }
+  
+  .typewriter-effect span {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(9, end) forwards;
+    width: 0;
+  }
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* อนิเมชันสำหรับนาฬิกา */
+  @keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(0.5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-0.5deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  .shake-effect {
+    animation: shake 0.2s ease-in-out;
+  }
+  
+  .pulse-animation {
+    animation: pulse-animation 2s infinite;
+  }
+  
+  @keyframes pulse-animation {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+  
+  .alarm-sound-waves {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
   @media (max-width: 640px) {
     .container {
       padding: 0.75rem;
@@ -63,4 +109,6 @@ body {
     }
     
     #question-container p, #question-container h2 {
-      font
+      font-size: 0.95rem;
+    }
+  }
