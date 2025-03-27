@@ -3,14 +3,14 @@ body {
   }
   
   .bg-hospital {
-    background-image: url('images/hospital-hall.jpg');
+    background-image: url('images/bed.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
   }
   
   .glass-effect {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2);

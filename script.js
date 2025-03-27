@@ -87,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function updateUI() {
+      const bgList = ["url('images/bed.jpg')", "url('images/bed.jpg')", "url('images/bed.jpg')",
+                      "url('images/hospital-hall.jpg')",
+                      "url('images/hospital-bed.jpg')",
+                      "url('images/sky.jpg')"]
+      console.log("update");
+      document.body.style.backgroundImage = bgList[currentQuestion];
       // ซ่อนทุกคำถามในทั้งสองภาษา
       for (let i = 1; i <= 5; i++) {
         const thQuestion = document.getElementById(`question-${i}-th`);
@@ -142,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function showResult() {
+      console.log("show");
       for (let i = 1; i <= 5; i++) {
         const thQuestion = document.getElementById(`question-${i}-th`);
         const enQuestion = document.getElementById(`question-${i}-en`);
@@ -180,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function calculateBloodType() {
+      console.log("calculate");
       let scores = { A: 0, B: 0, O: 0, AB: 0 };
       
       const answerMap = {
@@ -273,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // ฟังก์ชันเริ่มเกมใหม่
     function restart() {
+      console.log('restart');
       currentQuestion = 1;
       userAnswers = [];
       
