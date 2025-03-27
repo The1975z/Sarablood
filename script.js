@@ -95,12 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (currentQuestion < 3) {
         console.log("see");
-        document.body.querySelector(".clock").classList.remove("hidden");
+        document.body.querySelector("#clock").classList.remove("hidden");
       } else {
         console.log("unsee");
-        document.body.querySelector(".clock").classList.add("hidden");
+        document.body.querySelector("#clock").classList.add("hidden");
       }
-      
+
       // ซ่อนทุกคำถามในทั้งสองภาษา
       for (let i = 1; i <= 5; i++) {
         const thQuestion = document.getElementById(`question-${i}-th`);
