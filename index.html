@@ -1,16 +1,389 @@
-<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sarablood</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <h1>Welcome to Sarablood</h1>
-  <p>This is the beginning of the project.</p>
+<body class="bg-hospital min-h-screen bg-fixed bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center">
+  <div class="language-selector absolute top-4 right-4 z-10">
+    <button id="th-lang" class="px-2 py-1 bg-blue-500 text-white rounded mr-2 hover:bg-blue-600 transition">TH</button>
+    <button id="en-lang" class="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400 transition">EN</button>
+  </div>
 
+  <div class="container mx-auto px-4 py-8 relative z-0">
+    <h1 class="text-4xl font-bold text-center text-white mb-6 drop-shadow-lg animate__animated animate__fadeIn">Sarablood</h1>
+    
+    <div class="max-w-3xl mx-auto bg-white bg-opacity-30 backdrop-blur-md rounded-lg shadow-xl overflow-hidden animate__animated animate__fadeInUp">
+        <div class="bg-gray-800 bg-opacity-80 text-white p-4 text-center relative">
+          <!-- นาฬิกาอนาล็อกที่ปรับปรุงใหม่ -->
+          <div class="clock-container relative mx-auto w-40 h-40 mb-6 transform hover:scale-110 transition-transform duration-500">
+            <div class="clock-face absolute inset-0 rounded-full bg-gradient-to-br from-gray-100 to-gray-300 shadow-lg border-4 border-gray-400">
+              <!-- เลขชั่วโมง -->
+              <div class="hour-marks">
+                <div class="absolute w-1 h-3 bg-gray-800 top-2 left-1/2 transform -translate-x-1/2"></div>
+                <div class="absolute w-1 h-3 bg-gray-800 bottom-2 left-1/2 transform -translate-x-1/2"></div>
+                <div class="absolute h-1 w-3 bg-gray-800 left-2 top-1/2 transform -translate-y-1/2"></div>
+                <div class="absolute h-1 w-3 bg-gray-800 right-2 top-1/2 transform -translate-y-1/2"></div>
+                
+                <div class="absolute w-1 h-2 bg-gray-600 transform rotate-30 origin-bottom" style="top: 4px; left: calc(50% + 16px);"></div>
+                <div class="absolute w-1 h-2 bg-gray-600 transform rotate-60 origin-bottom" style="top: 10px; left: calc(50% + 13px);"></div>
+                <div class="absolute w-1 h-2 bg-gray-600 transform rotate-120 origin-bottom" style="bottom: 10px; left: calc(50% + 13px);"></div>
+                <div class="absolute w-1 h-2 bg-gray-600 transform rotate-150 origin-bottom" style="bottom: 4px; left: calc(50% + 16px);"></div>
+                <div class="absolute w-1 h-2 bg-gray-600 transform -rotate-30 origin-bottom" style="top: 4px; right: calc(50% + 16px);"></div>
+                <div class="absolute w-1 h-2 bg-gray-600 transform -rotate-60 origin-bottom" style="top: 10px; right: calc(50% + 13px);"></div>
+                <div class="absolute w-1 h-2 bg-gray-600 transform -rotate-120 origin-bottom" style="bottom: 10px; right: calc(50% + 13px);"></div>
+                <div class="absolute w-1 h-2 bg-gray-600 transform -rotate-150 origin-bottom" style="bottom: 4px; right: calc(50% + 16px);"></div>
+              </div>
+              
+              <!-- เข็มนาฬิกา -->
+              <div class="hour-hand absolute w-1.5 h-14 bg-red-600 rounded-t-full shadow-md origin-bottom z-10" style="top: 10%; left: 50%; transform: rotate(0deg); transform-origin: 50% 90%;"></div>
+              <div class="minute-hand absolute w-1 h-18 bg-blue-600 rounded-t-full shadow-md origin-bottom z-20" style="top: 6%; left: 50%; transform: rotate(0deg); transform-origin: 50% 94%;"></div>
+              <div class="second-hand absolute w-0.5 h-20 bg-yellow-500 rounded-t-full shadow-sm origin-bottom z-30" style="top: 0; left: 50%; transform: rotate(0deg); transform-origin: 50% 100%;"></div>
+              
+              <!-- จุดกลางนาฬิกา -->
+              <div class="center-dot absolute w-4 h-4 bg-gray-800 rounded-full z-40 shadow-inner" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+              <div class="center-dot-inner absolute w-2 h-2 bg-red-500 rounded-full z-50" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </div>
+            
+            <!-- เอฟเฟกต์เงา -->
+            <div class="clock-shadow absolute inset-0 rounded-full bg-black opacity-10 transform translate-x-1 translate-y-1 blur-md"></div>
+            
+            <!-- เอฟเฟกต์สะท้อนแสง -->
+            <div class="clock-reflection absolute w-3/4 h-1/4 bg-white opacity-20 rounded-full transform rotate-45" style="top: 10%; left: 10%;"></div>
+          </div>
+          
+          <!-- เวลาดิจิทัล -->
+          <div class="digital-time text-3xl font-bold mb-1 text-white drop-shadow-md pulse-animation">7:00</div>
+          
+          <!-- ข้อความนาฬิกาปลุก -->
+          <div class="alarm-container relative">
+            <div id="alarm-text" class="text-sm bg-red-500 px-3 py-1 rounded-lg inline-block animate__animated animate__pulse animate__infinite">นาฬิกาปลุกของคุณส่งเสียงดัง</div>
+            <div class="alarm-sound-waves absolute left-0 right-0 top-0 opacity-60 pointer-events-none">
+              <span class="inline-block w-4 h-4 rounded-full border border-red-300 animate-ping" style="animation-duration: 1.5s;"></span>
+              <span class="inline-block w-4 h-4 rounded-full border border-red-300 animate-ping" style="animation-duration: 2s; animation-delay: 0.3s;"></span>
+            </div>
+          </div>
+        </div>
+      
+      <div class="p-6" id="question-container">
+        <!-- คำถามที่ 1 ภาษาไทย -->
+        <div id="question-1-th" class="mb-6">
+          <p class="text-lg mb-2 text-gray-800 font-medium">นาฬิกาปลุกของคุณส่งเสียงดัง ปลุกคุณให้พร้อมสำหรับกิจกรรมเช้านี้ ว่าแต่</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">คำถามที่ 1: คุณมีแผนสำหรับเช้านี้หรือยังล่ะ</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. แน่นอน!
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. ลองเลื่อนโทรศัพท์ซักพักค่อยคิดแล้วกัน
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 1 ภาษาอังกฤษ -->
+        <div id="question-1-en" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">Your alarm rings loudly, waking you up for morning activities. But...</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">Question 1: Do you have plans for this morning?</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. Of course!
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. Let me scroll on my phone for a bit before deciding
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 2 ภาษาไทย -->
+        <div id="question-2-th" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">ระหว่างที่คุณกำลังจะลุกขึ้นนั้น สายเรียกเข้าจากเพื่อนคนหนึ่งของคุณก็ดังขึ้น<br>เพื่อน: แกๆ รีบมาที่โรงพยาบาลด่วนเลย เพื่อนสนิทแกโดนรถชน!</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">คำถามที่ 2: คุณคิดอะไร หลังจากประโยคนั้น</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. ใจเย็นๆ เราจะสติหลุดตอนนี้ไม่ได้
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. จะต้องรีบไปโรงพยาบาล อย่างอื่นช่างมันก่อนแล้วกัน
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. ไปแล้วเราจะช่วยอะไรได้ สิ่งที่ต้องทำใช่ไปโรงพยาบาลจริงเหรอ
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              4. มีข้อมูลอะไรที่ต้องถามเพื่อนเพิ่มไหมนะ
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 2 ภาษาอังกฤษ -->
+        <div id="question-2-en" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">As you're about to get up, your phone rings - it's your friend.<br>Friend: Hey! Come to the hospital now! Your best friend was hit by a car!</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">Question 2: What are you thinking after hearing this?</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. Stay calm, I can't lose my composure now
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. I need to rush to the hospital, everything else can wait
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. What could I really do there? Is going to the hospital really necessary?
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              4. Is there any additional information I should ask my friend?
+            </button>
+          </div>
+        </div>
+
+        <!-- สร้างส่วนที่เหลือในลักษณะเดียวกัน... -->
+        
+        <!-- คำถามที่ 3 ภาษาไทย -->
+        <div id="question-3-th" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">ผ่านไปไม่นาน คุณก็เดินทางมาถึงโรงพยาบาลจนได้และกำลังจะโทรหาเพื่อน แต่ก็มีคุณยายคนหนึ่งเข้ามาทัก<br>คุณยาย: ช่วยพายายไปส่งที่ห้องหน่อยได้ไหมจ๊ะ</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">คำถามที่ 3: คุณจะทำอย่างไร</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. เดี๋ยวผม/หนู เรียกพยาบาลให้นะครับ/คะ คุณยาย
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. ได้เลยครับ/ค่ะ!
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. ขอโทษนะครับ/คะ พอดีกำลังรีบ
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              4. ไม่สะดวกจริงๆครับ/ค่ะ พอดีเพื่อนเพึ่งถูกรถชน ขอไปหาเพื่อนก่อนนะครับ/คะ
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 3 ภาษาอังกฤษ -->
+        <div id="question-3-en" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">Not long after, you arrive at the hospital and are about to call your friend when an elderly woman approaches you.<br>Elderly woman: Could you help me to my room, dear?</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">Question 3: What would you do?</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. Let me call a nurse for you, ma'am
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. Of course, I'll help you!
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. I'm sorry, I'm in a hurry
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              4. I really can't right now. My friend was just in a car accident, I need to find them first
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 4 ภาษาไทย -->
+        <div id="question-4-th" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">หลังจากผ่านเหตุการณ์นั้นมาได้ คุณก็พบกับเพื่อนของคุณยืนอยู่ที่ทางเดิน คุณไปรอช้ารีบเข้าไปไถ่ถามอาการเพื่อนสนิทของคุณทันที<br>คุณ: เป็นไงบ้าง เค้าโอเคมั้ย?<br>เพื่อน: ไม่เลย ต้องใช้เลือดด่วน ต้องไปหาคนมาบริจาคตอนนี้เลยอะ<br>คุณ: ทำไมล่ะ โรงพยาบาลเลือดไม่พอเหรอ?<br>เพื่อน: เลือดสำรองมีน้อย ถ้าจะเอาไปให้เพื่อนเราแล้วมีเคสฉุกเฉินอื่นมาอีก อาจจะไม่พอให้คนอื่น เพราะฉะนั้นเราต้องหาเลือดสำรองมาเติม</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">คำถามที่ 4: คุณจะใช้วิธีใด ในการหาเลือดสำรองมาเติม</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. บริจาคด้วยตัวเองเลยสิ!
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. ไปถามข้อมูลจากคุณหมอให้รอบคอบ ก่อนจะทำอะไร
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. พยายามลงโพสต์ในโซเชียลต่างๆ
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 4 ภาษาอังกฤษ -->
+        <div id="question-4-en" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">After dealing with that, you find your friend standing in the hallway. You rush to ask about your close friend's condition.<br>You: How are they? Are they okay?<br>Friend: Not at all. They need blood urgently. We need to find donors right now.<br>You: Why? Doesn't the hospital have enough blood?<br>Friend: The reserves are low. If we use them for our friend and another emergency comes in, there might not be enough for others. So we need to replenish the supply.</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">Question 4: What method would you use to find blood donors?</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. I'll donate myself right away!
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. I'll consult with the doctor thoroughly before doing anything
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. I'll try posting on various social media platforms
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 5 ภาษาไทย -->
+        <div id="question-5-th" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">3 วันผ่านไป<br>เพื่อนของคุณพ้นขีดอัตรายแล้ว แต่ยังคงต้องนอนรักษาตัวอีกสักพัก</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">คำถามที่ 5: คุณจะเอาอะไรไปเยี่ยมเพื่อนของคุณ</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. ไม่เอาอะไรไป เพราะไม่แน่ใจว่าเพื่อนกินอะไรได้บ้าง
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. ถามเพื่อนว่าอยากกินอะไร
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. ทุกอย่างที่คิดออก ผลไม้ น้ำ เกม
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              4. ของที่เพื่อนชอบ เกม หนังสือการ์ตูน เผื่อจะได้คุยเล่นกัน
+            </button>
+          </div>
+        </div>
+
+        <!-- คำถามที่ 5 ภาษาอังกฤษ -->
+        <div id="question-5-en" class="mb-6 hidden">
+          <p class="text-lg mb-2 text-gray-800 font-medium">3 days later<br>Your friend is out of danger but still needs to stay in the hospital for a while longer.</p>
+          <h2 class="text-xl font-semibold mb-4 text-blue-800">Question 5: What would you bring when visiting your friend?</h2>
+          
+          <div class="space-y-3">
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              1. Nothing, because I'm not sure what they can eat
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              2. I'll ask them what they want to eat
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              3. Everything I can think of - fruits, water, games
+            </button>
+            <button class="option w-full p-3 bg-blue-100 bg-opacity-70 hover:bg-blue-200 rounded-lg text-left transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-sm hover:shadow">
+              4. Things they like - games, comics, so we can chat together
+            </button>
+          </div>
+        </div>
+
+        <!-- ผลลัพธ์ภาษาไทย -->
+        <div id="result-th" class="mb-6 hidden">
+          <h2 class="text-2xl font-bold mb-4 text-center text-red-600">ผลการทำนายกรุ๊ปเลือดของคุณ</h2>
+          <div id="blood-type-result" class="text-6xl font-bold text-center my-6 text-red-700"></div>
+          <p class="text-center mb-4">การทายกรุ๊ปเลือดจากคำถามเพียง 5 คำถาม อาจไม่แม่นยำ ถ้าอยากให้แน่ใจ ลองไปบริจาคเลือดดูสิ!</p>
+          <p class="text-center mb-6">หากเกิดเหตุการณ์เหมือนกับเนื้อเรื่องข้างต้น เลือดของคุณอาจช่วยคนได้อีกถึง 3 คน</p>
+          <div class="text-center">
+            <button id="restart-btn" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition transform hover:scale-105 shadow-lg">มาบริจาคเลือด เพื่อช่วยคนสำคัญของตัวเองและคนอื่นไปด้วยกัน</button>
+          </div>
+        </div>
+
+        <!-- ผลลัพธ์ภาษาอังกฤษ -->
+        <div id="result-en" class="mb-6 hidden">
+          <h2 class="text-2xl font-bold mb-4 text-center text-red-600">Your Blood Type Prediction</h2>
+          <div id="blood-type-result-en" class="text-6xl font-bold text-center my-6 text-red-700"></div>
+          <p class="text-center mb-4">Predicting your blood type from just 5 questions may not be accurate. If you want to be sure, try donating blood!</p>
+          <p class="text-center mb-6">In situations like the story above, your blood could help up to 3 people.</p>
+          <div class="text-center">
+            <button id="restart-btn-en" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition transform hover:scale-105 shadow-lg">Donate blood to help your loved ones and others!</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gray-100 bg-opacity-70 p-4 flex justify-between">
+        <button id="prev-btn" class="px-4 py-2 bg-gray-300 rounded opacity-50 cursor-not-allowed" disabled>ย้อนกลับ</button>
+        <button id="next-btn" class="px-4 py-2 bg-blue-500 text-white rounded opacity-50 cursor-not-allowed" disabled>ถัดไป</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function updateClock() {
+        // ตั้งเวลาเริ่มต้นที่ 7:00
+        const now = new Date();
+        const startTime = new Date();
+        startTime.setHours(7, 0, 0, 0);
+        
+        // คำนวณเวลาที่ผ่านไปจาก 7:00 (เพิ่มเอฟเฟกต์ทำให้เข็มวินาทีเคลื่อนที่)
+        const elapsedMs = (Date.now() % 60000);  // วน 0-59999 มิลลิวินาที
+        const seconds = Math.floor(elapsedMs / 1000);
+        
+        // คงเข็มนาทีและชั่วโมงไว้ที่ 7:00
+        const minutes = 0;
+        const hours = 7;
+        
+        // คำนวณองศาการหมุนของเข็มนาฬิกา
+        // เข็มชั่วโมง: 30 องศาต่อชั่วโมง + 0.5 องศาต่อนาที
+        const hourDeg = (hours * 30) + (minutes * 0.5);
+        // เข็มนาที: 6 องศาต่อนาที
+        const minuteDeg = minutes * 6;
+        // เข็มวินาที: 6 องศาต่อวินาที
+        const secondDeg = seconds * 6;
+        
+        // อัพเดทตำแหน่งเข็มนาฬิกา
+        const hourHand = document.querySelector('.hour-hand');
+        const minuteHand = document.querySelector('.minute-hand');
+        const secondHand = document.querySelector('.second-hand');
+        
+        if (hourHand && minuteHand && secondHand) {
+          hourHand.style.transition = seconds === 0 ? 'transform 0.5s cubic-bezier(0.4, 2.8, 0.3, 0.8)' : '';
+          minuteHand.style.transition = seconds === 0 ? 'transform 0.5s cubic-bezier(0.4, 2.8, 0.3, 0.8)' : '';
+          
+          secondHand.style.transition = seconds === 0 ? 'none' : 'transform 0.2s cubic-bezier(0.4, 2.8, 0.3, 0.8)';
+          
+          hourHand.style.transform = `rotate(${hourDeg}deg)`;
+          minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+          secondHand.style.transform = `rotate(${secondDeg}deg)`;
+          
+          if (seconds === 0 || seconds === 30) {
+            const clockFace = document.querySelector('.clock-face');
+            if (clockFace) {
+              clockFace.classList.add('shake-effect');
+              setTimeout(() => clockFace.classList.remove('shake-effect'), 500);
+            }
+          }
+          
+          const digitalTime = document.querySelector('.digital-time');
+          if (digitalTime) {
+            // แสดงเวลาแบบคงที่ที่ 7:00
+            digitalTime.textContent = '7:00';
+          }
+        }
+      }
+      
+      setInterval(updateClock, 1000);
+      
+      updateClock();
+      
+      // เพิ่ม CSS animation สำหรับนาฬิกา
+      document.head.insertAdjacentHTML('beforeend', `
+        <style>
+          @keyframes pulse-animation {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+          }
+          
+          .pulse-animation {
+            animation: pulse-animation 2s infinite;
+          }
+          
+          @keyframes shake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(0.5deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-0.5deg); }
+            100% { transform: rotate(0deg); }
+          }
+          
+          .shake-effect {
+            animation: shake 0.2s ease-in-out;
+          }
+          
+          .alarm-sound-waves {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+          }
+        </style>
+      `);
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
