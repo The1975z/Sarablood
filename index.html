@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-hospital min-h-screen bg-fixed bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center">
+  <img src="images/temjai.png" alt="temjai logo" class="absolute top-0 left-0 w-20 h-20 sm:w-24 sm:h-24">
   <div class="language-selector absolute top-4 right-4 z-10">
     <button id="th-lang" class="px-2 py-1 bg-blue-500 text-white rounded mr-2 hover:bg-blue-600 transition">TH</button>
     <button id="en-lang" class="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400 transition">EN</button>
@@ -267,9 +268,9 @@
 
         <!-- ผลลัพธ์ภาษาไทย -->
         <div id="result-th" class="mb-6 hidden">
-          <h2 class="text-2xl font-bold mb-4 text-center text-red-600">ผลการทำนายกรุ๊ปเลือดของคุณ</h2>
+          <h2 class="text-2xl font-bold mb-4 text-center text-red-600">ผลการทำนายหมู่เลือดของคุณ</h2>
           <div id="blood-type-result" class="text-6xl font-bold text-center my-6 text-red-700"></div>
-          <p class="text-center mb-4">การทายกรุ๊ปเลือดจากคำถามเพียง 5 คำถาม อาจไม่แม่นยำ ถ้าอยากให้แน่ใจ ลองไปบริจาคเลือดดูสิ!</p>
+          <p class="text-center mb-4">การทายกรุ๊ปเลือดจากคำถามเพียง 5 คำถาม อาจจะไม่แม่นยำ ถ้าอยากให้แน่ใจ ลองไปบริจาคเลือดดูสิ!</p>
           <p class="text-center mb-6">หากเกิดเหตุการณ์เหมือนกับเนื้อเรื่องข้างต้น เลือดของคุณอาจช่วยคนได้อีกถึง 3 คน</p>
           <div class="text-center">
             <button id="restart-btn" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition transform hover:scale-105 shadow-lg">มาบริจาคเลือด เพื่อช่วยคนสำคัญของตัวเองและคนอื่นไปด้วยกัน</button>
